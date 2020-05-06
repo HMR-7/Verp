@@ -62,6 +62,30 @@
 					"van-popup": "/wxcomponents/vant/dist/popup/index"
 				}
 			}
+		}, {
+			"path": "pages/page/index/createWork",
+			"style": {
+				"navigationBarTitleText": "添加作业",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		}, {
+			"path": "pages/page/index/createQuesion",
+			"style": {
+				"navigationBarTitleText": "添加随机问题",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
 		}
 	],
 

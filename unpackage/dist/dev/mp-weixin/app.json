@@ -3,7 +3,10 @@
     "pages/page/login/login",
     "pages/page/index/index",
     "pages/page/index/mine",
-    "pages/page/index/createClass"
+    "pages/page/index/createClass",
+    "pages/page/index/courseDetail",
+    "pages/page/index/createWork",
+    "pages/page/index/createQuesion"
   ],
   "subPackages": [],
   "window": {
@@ -32,6 +35,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap53.json"
+  "usingComponents": {}
 }

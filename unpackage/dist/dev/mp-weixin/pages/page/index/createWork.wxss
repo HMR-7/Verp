@@ -1,0 +1,29 @@
+.content {
+  width: 100%;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .workTitle {
+  margin-top: 20rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 2rpx solid #a2a2a2;
+}
+.content .workMegs {
+  margin-top: 40rpx;
+  width: 100%;
+  background-color: var(--contentBgc);
+}
+.content .confirm {
+  margin: 0 auto;
+  margin-top: 60rpx;
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 100rpx;
+  background-color: var(--themeColor);
+}
+

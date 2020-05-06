@@ -9,6 +9,14 @@ const api = {
     createClass: http + 'createClass', //创建课程
     getCourseList: http + 'getCourseList', //获取'我教的课'列表
     joinCourse: http + 'joinCourse', //加入现有课程
-    getJoinCourseList: http + 'getJoinCourseList' //获取已加入课程表
+    getJoinCourseList: http + 'getJoinCourseList', //获取已加入课程表
+    getJoinCourseNum: http + 'getJoinCourseNum', //获取加入课程人
+    toDelectStudent: http + 'toDelectStudent', //删除学生信息
+    toAddWorkMegs: http + 'toAddWorkMegs', //添加作业信息
+    getWorkList: http + 'getWorkList', //获取待发布作业列表
+    toShowWork: http + 'toShowWork', //发布作业
+    toAddQuestions: http + 'toAddQuestions', //添加随机问题
+    getQuesList: http + 'getQuesList' //获取随机列表问题
+
 }
 export default api

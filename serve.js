@@ -184,20 +184,31 @@ app.post('/createClass', function (req, res) {
 /* 获取教课列表 */
 app.get('/getCourseList', function (req, res) {
     let reData = req.query;
-    if (reData.user_id) {
+    if (reData.user_id && !reData.limit) {
         const sql = "SELECT * FROM course where user_id = '" + reData.user_id + "'"
         conn.query(sql, function (err, result) {
             let _res = JSON.stringify(result)
             let data = JSON.parse(_res);
             res.send(data);
         })
-    } else {
+    }
+    if (reData.limit) {
+        console.log(reData.limit, 'reData.limitreData.limit');
         let limit = Number(reData.page - 1) * Number(reData.limit);
-        const sql = "SELECT * FROM course limit " + limit + "," + reData.limit;
+        const sql = "SELECT * FROM course where user_id != '" + reData.user_id + "'" + " limit " + limit + "," + reData.limit
+
         conn.query(sql, function (err, result) {
             let _res = JSON.stringify(result)
             let data = JSON.parse(_res);
             res.send(data);
+        })
+    }
+    if (reData.id) {
+        const sql = "SELECT * FROM course where id = " + reData.id
+        conn.query(sql, function (err, result) {
+            let _res = JSON.stringify(result)
+            let data = JSON.parse(_res);
+            res.send(...data);
         })
     }
 
@@ -210,23 +221,44 @@ app.post('/joinCourse', function (req, res) {
     })
     req.on('end', function () {
         data = JSON.parse(data)
-        console.log(data, '课程加入传递的参数');
-
-        const sql = "insert into  listen (user_id,creater_id,course_id,courseName,className,isJoin,creater) values (" + data.user_id + "," + data.creater_id + "," + data.course_id + ",'" + data.courseName + "','" + data.className + "'," + 1 + ",'" + data.creater + "')"
+        const sql = "select * from listen where user_id = " + data.user_id
         conn.query(sql, function (err, result) {
-            if (err) {
-                console.log(err);
+            let _res = JSON.stringify(result)
+            let _data = JSON.parse(_res)
+            console.log(data, 'data');
+
+            let a = _data.some(v => {
+                if (v.course_id == data.course_id) {
+                    return true;
+                }
+            })
+            if (a) {
+                console.log('已经加入课程');
                 res.send({
-                    msg: "加入失败!!",
-                    flag: 'no'
+                    msg: "已加入课程!!",
+                    flag: 'had'
                 });
+                return;
             } else {
-                res.send({
-                    msg: "加入成功!!",
-                    flag: 'yes'
-                });
+                console.log(data, '课程加入传递的参数');
+                const sql = "insert into  listen (user_id,creater_id,course_id,courseName,className,isJoin,creater,studentName,user_phone) values (" + data.user_id + "," + data.creater_id + "," + data.course_id + ",'" + data.courseName + "','" + data.className + "'," + 1 + ",'" + data.creater + "','" + data.studentName + "','" + data.user_phone + "')"
+                conn.query(sql, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                        res.send({
+                            msg: "加入失败!!",
+                            flag: 'no'
+                        });
+                    } else {
+                        res.send({
+                            msg: "加入成功!!",
+                            flag: 'yes'
+                        });
+                    }
+                })
             }
         })
+
     })
 })
 app.get('/getJoinCourseList', function (req, res) {
@@ -239,6 +271,126 @@ app.get('/getJoinCourseList', function (req, res) {
             res.send(data)
         })
     }
+})
+app.get('/getJoinCourseNum', function (req, res) {
+    let reData = req.query;
+    const sql = "SELECT * FROM listen where course_id = " + reData.id
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(data);
+    })
+})
+app.get('/toDelectStudent', function (req, res) {
+    let reData = req.query;
+    const sql = "delete from listen where user_id= " + reData.student_id
+    conn.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.send({
+                msg: "删除失败!!",
+                flag: 'no'
+            });
+        } else {
+            res.send({
+                msg: "删除成功!!",
+                flag: 'yes'
+            });
+        }
+    })
+})
+app.post('/toAddWorkMegs', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        console.log(data, data);
+        const sql = "insert into  work (workMegs,workTitle,creater,course_id) values ('" + data.workMegs + "','" + data.workTitle + "','" + data.creater + "','" + data.course_id + "')"
+        conn.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "添加失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "添加成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+    })
+})
+app.get('/getWorkList', function (req, res) {
+    let reData = req.query;
+    const sql = "select * from work where course_id= " + reData.course_id
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(data);
+    })
+})
+app.post('/toShowWork', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        const sql = "update work SET isShow = '1' WHERE id=" + data.id
+        conn.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "发布失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "发布成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+
+    })
+})
+app.post('/toAddQuestions', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        const sql = 'insert into question(questionMegs,answer_user_id,answer_student_name,course_id) values(?,?,?,?)';
+        conn.query(sql, [data.questionMegs, data.user_id, data.studentName, data.course_id], function (err, result) {
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "发布失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "发布成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+
+    })
+})
+app.get('/getQuesList', function (req, res) {
+    let reData = req.query;
+    const sql = "select * from question where course_id= " + reData.course_id
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(data);
+    })
 })
 app.listen(3000, () => {
     console.log('服务已启动');

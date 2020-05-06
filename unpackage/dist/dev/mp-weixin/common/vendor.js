@@ -8532,7 +8532,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/page/login/login": { "navigationBarTitleText": "用户登录", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "disableScroll": true, "onReachBottomDistance": 50 }, "pages/page/index/index": { "navigationBarTitleText": "首页", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50 }, "pages/page/index/mine": { "navigationBarTitleText": "个人中心", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50 }, "pages/page/index/createClass": { "navigationBarTitleText": "创建课程", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50 } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/page/login/login": { "navigationBarTitleText": "用户登录", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "disableScroll": true, "onReachBottomDistance": 50, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/page/index/index": { "navigationBarTitleText": "首页", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/page/index/mine": { "navigationBarTitleText": "个人中心", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/page/index/createClass": { "navigationBarTitleText": "创建课程", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/page/index/courseDetail": { "navigationBarTitleText": "课程详情", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/page/index/createWork": { "navigationBarTitleText": "添加作业", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/page/index/createQuesion": { "navigationBarTitleText": "添加随机问题", "navigationBarBackgroundColor": "#7f9ff3", "navigationBarTextStyle": "white", "enablePullDownRefresh": true, "onReachBottomDistance": 50 } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -9173,8 +9173,16 @@ var api = {
   createClass: http + 'createClass', //创建课程
   getCourseList: http + 'getCourseList', //获取'我教的课'列表
   joinCourse: http + 'joinCourse', //加入现有课程
-  getJoinCourseList: http + 'getJoinCourseList' //获取已加入课程表
+  getJoinCourseList: http + 'getJoinCourseList', //获取已加入课程表
+  getJoinCourseNum: http + 'getJoinCourseNum', //获取加入课程人
+  toDelectStudent: http + 'toDelectStudent', //删除学生信息
+  toAddWorkMegs: http + 'toAddWorkMegs', //添加作业信息
+  getWorkList: http + 'getWorkList', //获取待发布作业列表
+  toShowWork: http + 'toShowWork', //发布作业
+  toAddQuestions: http + 'toAddQuestions', //添加随机问题
+  getQuesList: http + 'getQuesList' //获取随机列表问题
 };var _default =
+
 api;exports.default = _default;
 
 /***/ })

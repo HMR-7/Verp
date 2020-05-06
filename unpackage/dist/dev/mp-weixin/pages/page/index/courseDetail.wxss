@@ -1,0 +1,103 @@
+.content {
+  width: 100%;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .iconfont {
+  font-size: 60rpx;
+  text-align: center;
+}
+.content .courseName {
+  padding: 40rpx 0 0 40rpx;
+  font-size: 48rpx;
+  height: 160rpx;
+}
+.content .navModule {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.content .title {
+  margin-top: 10rpx;
+  font-size: var(--navFontSize);
+}
+.content .navContent {
+  margin-top: 20rpx;
+  border-top: 4rpx solid #f0ad4e;
+}
+.content .navContent .navContentTitle {
+  color: var(--themeColor);
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 40rpx;
+  padding-left: 20rpx;
+}
+.content .navContent .studentList {
+  padding-bottom: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  border-bottom: 2rpx solid #ededed;
+}
+.content .navContent .studentList .delBtn {
+  background-color: red;
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.content .navContent .studentList .showBtn {
+  background-color: #00b26a;
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.content .navContent .studentList .checkBtn {
+  background-color: #4cd964;
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.content .navContent .addWork {
+  position: fixed;
+  top: 93%;
+  left: calc(50% - 200rpx);
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 100rpx;
+  background-color: var(--themeColor);
+}
+.content .navContent .comfirm {
+  margin: 0 auto;
+  margin-top: 20rpx;
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 100rpx;
+  background-color: #4cd964;
+}
+.content .navContent .quesBox {
+  margin: 0 20rpx;
+  margin-top: 40rpx;
+  padding: 20rpx 0;
+  background: #fc914c;
+  border-radius: 20rpx;
+}
+

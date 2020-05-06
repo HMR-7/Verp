@@ -206,6 +206,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -248,6 +255,11 @@ var _default =
     console.log(t.userInfo, "userInfo");
   },
   methods: {
+    toDetail: function toDetail(id, user_id) {
+      uni.navigateTo({
+        url: "./courseDetail?id=" + id + "&&user_id=" + user_id });
+
+    },
     getItem: function getItem(item) {
       var t = this;
       t.show = true;
@@ -265,7 +277,9 @@ var _default =
         course_id: item.id,
         courseName: item.courseName,
         className: item.className,
-        creater: item.creater };
+        creater: item.creater,
+        studentName: userInfo.nickName,
+        user_phone: userInfo.userPhone };
 
       t.$utils.ajax(t.$api.joinCourse, "post", data, function (res) {
         console.log(res);
@@ -283,6 +297,7 @@ var _default =
 
       t.$utils.ajax(t.$api.getJoinCourseList, "get", data, function (res) {
         t.joinCourseList = res;
+        console.log(res);
       });
     },
     /* 获取教课列表 */
@@ -300,9 +315,11 @@ var _default =
     /* 获取全部课程列表 */
     getAllCourseList: function getAllCourseList() {
       var t = this,
+      user_id = uni.getStorageSync("userInfo").id,
       list = t.allCourseList,
       page = t.page;
       var data = {
+        user_id: user_id,
         page: page,
         limit: 5 };
 

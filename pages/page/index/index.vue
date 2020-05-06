@@ -14,7 +14,12 @@
       ></view>
     </view>
     <view class="navContent" v-if="isActive==1">
-      <view class="box" v-for="(item,index) in courseList" :key="index">
+      <view
+        class="box"
+        v-for="(item,index) in courseList"
+        :key="index"
+        @tap="toDetail(item.id,item.user_id)"
+      >
         <view class="courseTitle">{{item.courseName}}</view>
         <view class="createrMegs">
           <span class="className">{{item.className}}</span>
@@ -28,6 +33,8 @@
         style="background-color:#54b5c9"
         v-for="(item,index) in joinCourseList"
         :key="index"
+        @tap="toDetail(item.course_id,item.creater_id)"
+
       >
         <view class="courseTitle">{{item.courseName}}</view>
         <view class="createrMegs">
@@ -99,6 +106,11 @@ export default {
     console.log(t.userInfo, "userInfo");
   },
   methods: {
+    toDetail(id, user_id) {
+      uni.navigateTo({
+        url: "./courseDetail?id=" + id + "&&user_id=" + user_id
+      });
+    },
     getItem(item) {
       let t = this;
       t.show = true;
@@ -116,7 +128,9 @@ export default {
         course_id: item.id,
         courseName: item.courseName,
         className: item.className,
-        creater: item.creater
+        creater: item.creater,
+        studentName:userInfo.nickName,
+        user_phone:userInfo.userPhone
       };
       t.$utils.ajax(t.$api.joinCourse, "post", data, res => {
         console.log(res);
@@ -134,6 +148,7 @@ export default {
       };
       t.$utils.ajax(t.$api.getJoinCourseList, "get", data, res => {
         t.joinCourseList = res;
+        console.log(res);
       });
     },
     /* 获取教课列表 */
@@ -151,9 +166,11 @@ export default {
     /* 获取全部课程列表 */
     getAllCourseList() {
       let t = this,
+        user_id = uni.getStorageSync("userInfo").id,
         list = t.allCourseList,
         page = t.page;
       let data = {
+        user_id: user_id,
         page: page,
         limit: 5
       };
