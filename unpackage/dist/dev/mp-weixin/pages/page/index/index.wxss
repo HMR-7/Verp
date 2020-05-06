@@ -1,0 +1,70 @@
+.content {
+  width: 100%;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: var(--contentBgc);
+}
+.content .allClass {
+  margin-bottom: 40rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  border-bottom: 2rpx solid #c0c0c0;
+}
+.content .allClass .isActive {
+  color: #000;
+  font-size: var(--bigTitleSize);
+}
+.content .allClass view {
+  margin: auto 0;
+  margin-left: 20rpx;
+  text-align: center;
+  width: 180rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #c0c0c0;
+  font-size: var(--navFontSize);
+}
+.content .navContent {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .navContent .box {
+  margin: 0 40rpx 40rpx 40rpx;
+  color: #fff;
+  border-radius: 10rpx;
+  background-color: var(--themeColor);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.content .navContent .box .courseTitle {
+  font-size: var(--titleSize);
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+}
+.content .navContent .box .createrMegs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding: 0 20rpx;
+  font-size: var(--normalFontSize);
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.content .addCourse {
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 36rpx;
+}
+

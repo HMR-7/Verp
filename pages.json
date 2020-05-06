@@ -1,0 +1,93 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/page/login/login",
+			"style": {
+				"navigationBarTitleText": "用户登录",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-count-down": "/wxcomponents/vant/dist/count-down/index"
+				}
+			}
+		},
+		{
+			"path": "pages/page/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		}, {
+			"path": "pages/page/index/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		}, {
+			"path": "pages/page/index/createClass",
+			"style": {
+				"navigationBarTitleText": "创建课程",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		}, {
+			"path": "pages/page/index/courseDetail",
+			"style": {
+				"navigationBarTitleText": "课程详情",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		}
+	],
+
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#000000",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/page/index/index",
+				"text": "首页",
+				"iconPath": "static/images/index.png",
+				"selectedIconPath": "static/images/selIndex.png"
+			},
+			{
+				"pagePath": "pages/page/index/mine",
+				"text": "个人中心",
+				"iconPath": "static/images/mine.png",
+				"selectedIconPath": "static/images/selMine.png"
+			}
+		]
+	}
+}

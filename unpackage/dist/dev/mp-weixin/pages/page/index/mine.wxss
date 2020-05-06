@@ -1,0 +1,179 @@
+.content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--contentBgc);
+  /* 头部区域 */
+  /* 用户操作区域 */
+  /* 学生中心 */
+  /* 电话客服 */
+}
+.content .iconfont {
+  font-size: 50rpx;
+  color: var(--themeColor);
+  padding: 10rpx;
+  padding-top: 20rpx;
+}
+.content .top_header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  position: relative;
+  color: #fff;
+  padding: 40rpx;
+  background-color: var(--themeColor);
+  /* 详情箭头 */
+  /* 用户头像 */
+}
+.content .top_header .arrows {
+  position: absolute;
+  top: 100rpx;
+  right: 80rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 4rpx solid #ffffff;
+  border-right: 4rpx solid #ffffff;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.content .top_header .header {
+  /* margin: 40rpx 0; */
+  width: 154rpx;
+  height: 154rpx;
+  border-radius: 50%;
+  /* border: 5rpx solid yellow; */
+}
+.content .top_header .name_box {
+  /* 用户名 */
+  /* 用户所在城市 */
+}
+.content .top_header .name_box .box_top {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.content .top_header .name_box .box_top .name {
+  font-size: 36rpx;
+  font-weight: 800;
+  padding-left: 30rpx;
+}
+.content .top_header .name_box .userCity {
+  font-size: 26rpx;
+  padding-left: 30rpx;
+}
+.content .header_title {
+  margin: 0 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  /* width: 100%; */
+  height: 70rpx;
+  line-height: 70rpx;
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  background-color: #fff;
+  border-bottom: 2rpx solid #f6f6f6;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  /* box-sizing: border-box; */
+}
+.content .service {
+  margin: 0 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  background-color: #fff;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+}
+.content .service .service_line {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding-bottom: 30rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .service .service_line .caption {
+  font-size: 26rpx;
+  color: #6c6c6c;
+}
+.content .service .service_line button {
+  position: static;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 1px solid transparent;
+  background-color: #fff;
+  line-height: 50rpx;
+}
+.content .service .service_line button::after {
+  width: 0 !important;
+  height: 0 !important;
+}
+.content .contactWay {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  text-align: center;
+  margin: auto 0;
+  border: 4rpx solid #f6f6f6;
+}
+.content .addValue {
+  border: 2rpx solid #a2a2a2;
+  width: 70%;
+  height: 60rpx;
+  border-radius: 10rpx;
+  text-align: center;
+}
+.content .sumBtm {
+  margin: 0 auto;
+  margin-top: 20rpx;
+  background-color: var(--themeColor);
+  color: #fff;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+}
+

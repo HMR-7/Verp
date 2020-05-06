@@ -1,0 +1,200 @@
+.content {
+  width: 100%;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: var(--contentBgc);
+  /* 登录授权按钮样式 */
+  /* 登录页Login */
+  /* 用户操作区域 */
+}
+.content button {
+  position: static !important;
+}
+.content button::after {
+  width: 0;
+  height: 0;
+}
+.content .iconfont {
+  color: var(--themeColor);
+}
+.content .title {
+  width: 100%;
+  height: 340rpx;
+  line-height: 200rpx;
+  text-align: center;
+  background-color: var(--themeColor);
+  color: #fff;
+  font-size: 150rpx;
+}
+.content .userCenter {
+  position: fixed;
+  top: 200rpx;
+  left: 4%;
+  width: 92%;
+  border-radius: 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  /*阴影/
+    /* 用户名 */
+  /* 手机 */
+  /* 验证码 */
+  /* input框样式 */
+  /* input聚焦后样式 */
+  /* 按钮可用样式 */
+  /* 按钮禁用样式 */
+  /* 授权用户登录样式 */
+}
+.content .userCenter .name {
+  margin: 0rpx 40rpx 20rpx 40rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: row;
+  -webkit-justify-content: row;
+          justify-content: row;
+  border-bottom: 2rpx solid #ebebeb;
+  /* 用户名图标样式 */
+}
+.content .userCenter .name .nameIcon {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: row;
+  -webkit-justify-content: row;
+          justify-content: row;
+  margin: auto 0;
+  text-align: center;
+}
+.content .userCenter .name .nameIcon .iconNameCard {
+  padding: 0 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 50rpx;
+}
+.content .userCenter .phone {
+  margin: 0 40rpx 20rpx 40rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: row;
+  -webkit-justify-content: row;
+          justify-content: row;
+  border-bottom: 2rpx solid #ebebeb;
+}
+.content .userCenter .phone .numberIcon {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: row;
+  -webkit-justify-content: row;
+          justify-content: row;
+  margin: auto 0;
+  font-size: var(--titleSize);
+  text-align: center;
+}
+.content .userCenter .phone .code {
+  margin: auto 0;
+  margin-right: 20rpx;
+  width: 350rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 22rpx;
+  text-align: center;
+  color: var(--remarksFontColor);
+  background-color: var(--remarksColor);
+  border-radius: 10rpx;
+}
+.content .userCenter .phone .codeActive {
+  margin: auto 0;
+  margin-right: 20rpx;
+  width: 350rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 22rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  color: #fff;
+  background-color: var(--themeColor);
+}
+.content .userCenter .phone .icon-shouji {
+  padding-left: 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 50rpx;
+}
+.content .userCenter .phone .item {
+  width: 50rpx;
+  height: 50rpx;
+}
+.content .userCenter .testCode {
+  margin: 0 40rpx 20rpx 40rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: row;
+  -webkit-justify-content: row;
+          justify-content: row;
+  border-bottom: 2rpx solid #ebebeb;
+}
+.content .userCenter .testCode .codeIcon {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: row;
+  -webkit-justify-content: row;
+          justify-content: row;
+  margin: auto 0;
+  text-align: center;
+}
+.content .userCenter .testCode .icon-yanzhengma {
+  padding: 0 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 50rpx;
+}
+.content .userCenter .write {
+  width: 100%;
+  height: 100rpx;
+}
+.content .userCenter .inputFoucs {
+  border-bottom: 2rpx solid #7f9ff3;
+}
+.content .userCenter .confirmActive {
+  margin: 40rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #fff;
+  font-size: var(--titleSize);
+  font-weight: bold;
+  background-color: var(--themeColor);
+  border-radius: 10rpx;
+}
+.content .userCenter .confirm {
+  margin: 40rpx 40rpx 20rpx 40rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: var(--remarksFontColor);
+  font-size: var(--titleSize);
+  background-color: var(--remarksColor);
+  border-radius: 10rpx;
+}
+.content .userCenter .authorization {
+  margin: 0 40rpx;
+  margin-bottom: 40rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: var(--themeColor);
+  font-size: var(--titleSize);
+  font-weight: bold;
+  background-color: #fff;
+  border: 2rpx solid;
+  border-radius: 10rpx;
+}
+

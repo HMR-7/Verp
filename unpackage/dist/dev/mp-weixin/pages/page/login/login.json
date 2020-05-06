@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "用户登录",
+  "navigationBarBackgroundColor": "#7f9ff3",
+  "navigationBarTextStyle": "white",
+  "disableScroll": true,
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "van-field": "/wxcomponents/vant/dist/field/index",
+    "van-count-down": "/wxcomponents/vant/dist/count-down/index"
+  }
+}
