@@ -293,16 +293,18 @@ var _default =
         js_code: t.code };
 
       t.$utils.ajax(t.$api.getOpenid, "get", data, function (res) {
-        console.log(res, '获取openid');
+        console.log(res, "获取openid");
         t.openid = res.openid;
-        uni.setStorageSync('openid', res.openid);
+        uni.setStorageSync("openid", res.openid);
         var data = {
           openid: res.openid };
 
         t.$utils.ajax(t.$api.userInfo, "get", data, function (res) {
           console.log(res, "用户表信息");
-          console.log(res.openid, '用户openid');
-          uni.setStorageSync("UserId", res.id);
+          var us = t.userRes;
+          us = Object.assign(us, res);
+          uni.setStorageSync("userInfo", us);
+          console.log(res.openid, "用户openid");
           uni.setStorageSync("isAdmin", res.isAdmin);
           if (res.openid) {
             console.log("用户已经存在");
@@ -331,8 +333,6 @@ var _default =
             console.log(t.userRes);
           }
         });
-
-
       });
     },
     /* 授权登录 */

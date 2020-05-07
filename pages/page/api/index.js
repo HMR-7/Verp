@@ -16,7 +16,12 @@ const api = {
     getWorkList: http + 'getWorkList', //获取待发布作业列表
     toShowWork: http + 'toShowWork', //发布作业
     toAddQuestions: http + 'toAddQuestions', //添加随机问题
-    getQuesList: http + 'getQuesList' //获取随机列表问题
+    getQuesList: http + 'getQuesList', //获取随机列表问题
+    toAddDiscuss: http + 'toAddDiscuss', //添加讨论话题
+    getDiscussList: http + 'getDiscussList', //获取话题列表
+    toShowDis: http + 'toShowDis', //发布话题
+    addDiscussMegs: http + 'addDiscussMegs', //发布话题评论
+    getAllDiscussList: http + 'getDiscussList' //获取评论列表
 
 }
 export default api

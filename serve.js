@@ -392,6 +392,107 @@ app.get('/getQuesList', function (req, res) {
         res.send(data);
     })
 })
+app.post('/toAddDiscuss', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        const sql = 'insert into discuss(course_id,creater_id,title) values(?,?,?)';
+        conn.query(sql, [data.course_id, data.creater_id, data.title], function (err, result) {
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "发布失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "发布成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+
+    })
+})
+app.get('/getDiscussList', function (req, res) {
+    let reData = req.query;
+    const sql = "select * from discuss where course_id= " + reData.course_id
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(data);
+    })
+})
+app.post('/toShowDis', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        console.log(data);
+
+        const sql = "update discuss SET isShow = '1' WHERE id=" + data.id
+
+        conn.query(sql, function (err, result) {
+            console.log(result, 'result');
+
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "发布失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "发布成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+
+    })
+})
+app.post('/addDiscussMegs', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        console.log(data);
+        const sql = 'insert into answerDiscuss(nickName,userImg,userMegs,course_id,discuss_id) values(?,?,?,?,?)';
+        conn.query(sql, [data.nickName, data.userImg, data.userMegs, data.course_id, data.discuss_id], function (err, result) {
+            console.log(result, 'result');
+
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "评论失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "评论成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+
+    })
+})
+app.get('/getAllDiscussList', function (req, res) {
+    let reData = req.query;
+    const sql = "select * from answerDiscuss where discuss_id= " + reData.discuss_id
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(data);
+    })
+})
 app.listen(3000, () => {
     console.log('服务已启动');
 

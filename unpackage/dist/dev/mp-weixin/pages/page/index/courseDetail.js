@@ -99,14 +99,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   if (!_vm._isMounted) {
     _vm.e0 = function($event) {
-      _vm.showQuestion = true
+      _vm.showDiscuss = true
     }
 
     _vm.e1 = function($event) {
-      _vm.showQuestion = false
+      _vm.showDiscuss = false
     }
 
     _vm.e2 = function($event) {
+      _vm.showQuestion = true
+    }
+
+    _vm.e3 = function($event) {
+      _vm.showQuestion = false
+    }
+
+    _vm.e4 = function($event) {
       _vm.show = false
     }
   }
@@ -262,14 +270,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
+      showDiscuss: false,
       showQuestion: false,
       show: false,
       isAdmin: 0,
       question: "", //随机问题信息
+      discussTitle: "", //话题标题
       answerQue: "",
       userInfo: "", //用户信息
       isActive: 1,
@@ -280,7 +335,8 @@ var _default =
       workList: "", //待发布作业列表
       nowWorkList: "", //已发布作业列表
       workMegs: "", //显示作业信息
-      getQuesList: "" //随机问题列表
+      getQuesList: "", //随机问题列表
+      getDiscussList: "" // 获取讨论话题列表
     };
   },
   onShow: function onShow() {
@@ -304,6 +360,7 @@ var _default =
     t.getCourseDetail();
     t.getWorkList();
     t.getQues();
+    t.getDisList();
   },
   methods: {
     toCheckMegs: function toCheckMegs(workMegs) {
@@ -325,6 +382,25 @@ var _default =
         t.getWorkList();
       });
     },
+    toShowDis: function toShowDis(id, isShow) {
+      var t = this;
+      console.log(id, "id");
+      console.log(isShow, "isShow");
+      if (isShow) {
+        t.$utils.showToast("作业已发布");
+        return;
+      }
+      var data = {
+        id: id };
+
+      t.$utils.ajax(t.$api.toShowDis, "post", data, function (res) {
+        t.$utils.showToast(res.msg);
+        console.log(1111);
+
+        t.getDisList();
+      });
+    },
+
     getWorkList: function getWorkList() {
       var t = this;
       var data = {
@@ -375,6 +451,16 @@ var _default =
         t.courseDetail = res;
       });
     },
+    getQues: function getQues() {
+      var t = this;
+      var data = {
+        course_id: t.course_id };
+
+      t.$utils.ajax(t.$api.getQuesList, "get", data, function (res) {
+        t.getQuesList = res;
+        console.log(res, "随机问题列表");
+      });
+    },
     comfirm: function comfirm() {
       var t = this,
       JoinCourseNum = t.JoinCourseNum;
@@ -397,23 +483,62 @@ var _default =
         t.getQues();
       });
     },
-    getQues: function getQues() {
+    discussComfirm: function discussComfirm() {
+      var t = this;
+      var data = {
+        isActive: 2,
+        course_id: t.course_id,
+        creater_id: t.creater_id,
+        title: t.discussTitle };
+
+      t.$utils.ajax(t.$api.toAddDiscuss, "post", data, function (res) {
+        t.$utils.showToast(res.msg);
+        if (res.flag == "yes") {
+          t.showDiscuss = false;
+        }
+        t.getDisList();
+      });
+    },
+    getDisList: function getDisList() {
       var t = this;
       var data = {
         course_id: t.course_id };
 
-      t.$utils.ajax(t.$api.getQuesList, "get", data, function (res) {
-        t.getQuesList = res;
-        console.log(res, "随机问题列表");
+      t.$utils.ajax(t.$api.getDiscussList, "get", data, function (res) {
+        console.log(res, "讨论区话题列表");
+        t.getDiscussList = res;
       });
     },
+
     toAnswer: function toAnswer(id) {
       var t = this;
       if (t.userInfo.id != id) {
         t.$utils.showToast("您暂无权回答此问题");
       } else {
-        console.log('我来回答');
+        console.log("我来回答");
+      }
+    },
+    toDiscuss: function toDiscuss(id, courseid, title) {
+      var t = this,
+      arr = t.JoinCourseNum;
+      var a = arr.some(function (v) {
+        if (v.user_id == t.userInfo.id) {
+          return true;
+        }
+      });
+      if (!a) {
+        console.log("欢迎参加讨论！");
+        uni.navigateTo({
+          url:
+          "./answerDiscuss?discuss_id=" +
+          id +
+          "&&course_id=" +
+          courseid +
+          "&&title=" +
+          title });
 
+      } else {
+        t.$utils.showToast("您暂无权参与此话题");
       }
     },
     toDelect: function toDelect(user_id) {

@@ -130,49 +130,49 @@ export default {
     getUserChart() {
       let t = this;
       let data = {
-        js_code:t.code
-      }
+        js_code: t.code
+      };
       t.$utils.ajax(t.$api.getOpenid, "get", data, res => {
-        console.log(res,'获取openid');
+        console.log(res, "获取openid");
         t.openid = res.openid;
-        uni.setStorageSync('openid', res.openid);
-          let data = {
-            openid: res.openid
-          };
-          t.$utils.ajax(t.$api.userInfo, "get", data, res => {
-            console.log(res, "用户表信息");
-            console.log(res.openid,'用户openid')
-            uni.setStorageSync("UserId", res.id);
-            uni.setStorageSync("isAdmin", res.isAdmin);
-            if (res.openid) {
-              console.log("用户已经存在");
-              t.$utils.showToast("验证通过");
-              setTimeout(() => {
-                uni.hideToast();
-                uni.switchTab({
-                  url: "../index/index"
-                });
-              }, 1000);
-              return;
-            } else if (res.msg == false) {
-              let nickName = uni.getStorageSync("userInfo").nickName;
-              let data = {
-                openid: t.openid,
-                userName: nickName,
-                userPhone: t.userPhone
-              };
-              t.$utils.ajax(t.$api.insertuserInfo, "post", data, res => {
-                console.log(res, "用户插入表后的返回信息");
-                uni.setStorageSync("UserId", res[0].id);
-                uni.switchTab({
-                  url: "../index/index"
-                });
+        uni.setStorageSync("openid", res.openid);
+        let data = {
+          openid: res.openid
+        };
+        t.$utils.ajax(t.$api.userInfo, "get", data, res => {
+          console.log(res, "用户表信息");
+          let us = t.userRes;
+          us = Object.assign(us, res);
+          uni.setStorageSync("userInfo", us);
+          console.log(res.openid, "用户openid");
+          uni.setStorageSync("isAdmin", res.isAdmin);
+          if (res.openid) {
+            console.log("用户已经存在");
+            t.$utils.showToast("验证通过");
+            setTimeout(() => {
+              uni.hideToast();
+              uni.switchTab({
+                url: "../index/index"
               });
-              console.log(t.userRes);
-            }
-          });
-        
-    
+            }, 1000);
+            return;
+          } else if (res.msg == false) {
+            let nickName = uni.getStorageSync("userInfo").nickName;
+            let data = {
+              openid: t.openid,
+              userName: nickName,
+              userPhone: t.userPhone
+            };
+            t.$utils.ajax(t.$api.insertuserInfo, "post", data, res => {
+              console.log(res, "用户插入表后的返回信息");
+              uni.setStorageSync("UserId", res[0].id);
+              uni.switchTab({
+                url: "../index/index"
+              });
+            });
+            console.log(t.userRes);
+          }
+        });
       });
     },
     /* 授权登录 */
@@ -284,7 +284,6 @@ export default {
         t.getCode();
       }
     }
-    
   }
 };
 </script>

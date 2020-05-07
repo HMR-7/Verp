@@ -39,12 +39,57 @@
           </view>
         </view>
       </view>
-      <view v-else-if="isActive==2">2</view>
+      <view v-else-if="isActive==2">
+        <view v-if="isAdmin" class="addWork" @tap="showDiscuss=true">添加话题</view>
+        <view v-if="isAdmin" class="navContentTitle">待发布话题列表</view>
+        <view v-if="isAdmin">
+          <scroll-view scroll-y="true" style="max-height:400rpx;padding-top: 20rpx">
+            <view v-for="(item,index) in getDiscussList" :key="index">
+              <view class="studentList">
+                <text style="color:#007aff;font-weight: bolder;">话题:</text>
+                <span>{{item.title}}</span>
+                <text style="color:#007aff;font-weight: bolder;">状态:</text>
+                <span
+                  v-text="item.isShow?'已发布':'待发布'"
+                  class="showBtn"
+                  @tap="toShowDis(item.id,item.isShow)"
+                ></span>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="navContentTitle">已发布话题列表</view>
+        <view>
+          <scroll-view scroll-y="true" style="max-height:400rpx;padding-top: 20rpx">
+            <view v-for="(item,index) in getDiscussList" :key="index">
+              <view class="studentList" v-if="item.isShow">
+                <text style="color:#007aff;font-weight: bolder;">话题:</text>
+                <span>{{item.title}}</span>
+                <span class="checkBtn" @tap="toDiscuss(item.id,item.course_id,item.title)">参与讨论</span>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <van-popup
+          :show="showDiscuss"
+          position="center"
+          @close="showDiscuss=false"
+          custom-style="padding:20rpx"
+        >
+          <textarea
+            v-model="discussTitle"
+            maxlength="-1"
+            placeholder="请输入话题标题"
+            style="background-color: var(--contentBgc);"
+          ></textarea>
+          <view class="comfirm" @tap="discussComfirm">完成</view>
+        </van-popup>
+      </view>
       <view v-else-if="isActive==3">
         <view v-if="isAdmin" class="addWork" @tap="toAddWork(courseDetail.creater,course_id)">添加作业</view>
-        <view class="navContentTitle">待发布作业列表</view>
-        <view>
-          <scroll-view scroll-y="true" style="max-height:300rpx;padding-top: 20rpx">
+        <view v-if="isAdmin" class="navContentTitle">待发布作业列表</view>
+        <view v-if="isAdmin">
+          <scroll-view scroll-y="true" style="max-height:400rpx;padding-top: 20rpx">
             <view v-for="(item,index) in workList" :key="index">
               <view class="studentList">
                 <text style="color:#007aff;font-weight: bolder;">作业:</text>
@@ -64,7 +109,7 @@
         </view>
         <view class="navContentTitle">已发布作业列表</view>
         <view>
-          <scroll-view scroll-y="true" style="max-height:300rpx;padding-top: 20rpx">
+          <scroll-view scroll-y="true" style="max-height:400rpx;padding-top: 20rpx">
             <view v-for="(item,index) in workList" :key="index">
               <view class="studentList" v-if="item.isShow">
                 <text style="color:#007aff;font-weight: bolder;">作业:</text>
@@ -121,10 +166,12 @@
 export default {
   data() {
     return {
+      showDiscuss: false,
       showQuestion: false,
       show: false,
       isAdmin: 0,
       question: "", //随机问题信息
+      discussTitle: "", //话题标题
       answerQue: "",
       userInfo: "", //用户信息
       isActive: 1,
@@ -135,7 +182,8 @@ export default {
       workList: "", //待发布作业列表
       nowWorkList: "", //已发布作业列表
       workMegs: "", //显示作业信息
-      getQuesList: "" //随机问题列表
+      getQuesList: "", //随机问题列表
+      getDiscussList: "" // 获取讨论话题列表
     };
   },
   onShow() {
@@ -159,6 +207,7 @@ export default {
     t.getCourseDetail();
     t.getWorkList();
     t.getQues();
+    t.getDisList();
   },
   methods: {
     toCheckMegs(workMegs) {
@@ -180,6 +229,25 @@ export default {
         t.getWorkList();
       });
     },
+    toShowDis(id, isShow) {
+      let t = this;
+      console.log(id, "id");
+      console.log(isShow, "isShow");
+      if (isShow) {
+        t.$utils.showToast("作业已发布");
+        return;
+      }
+      let data = {
+        id: id
+      };
+      t.$utils.ajax(t.$api.toShowDis, "post", data, res => {
+        t.$utils.showToast(res.msg);
+        console.log(1111);
+
+        t.getDisList();
+      });
+    },
+
     getWorkList() {
       let t = this;
       let data = {
@@ -230,6 +298,16 @@ export default {
         t.courseDetail = res;
       });
     },
+    getQues() {
+      let t = this;
+      let data = {
+        course_id: t.course_id
+      };
+      t.$utils.ajax(t.$api.getQuesList, "get", data, res => {
+        t.getQuesList = res;
+        console.log(res, "随机问题列表");
+      });
+    },
     comfirm() {
       let t = this,
         JoinCourseNum = t.JoinCourseNum;
@@ -252,23 +330,62 @@ export default {
         t.getQues();
       });
     },
-    getQues() {
+    discussComfirm() {
+      let t = this;
+      let data = {
+        isActive: 2,
+        course_id: t.course_id,
+        creater_id: t.creater_id,
+        title: t.discussTitle
+      };
+      t.$utils.ajax(t.$api.toAddDiscuss, "post", data, res => {
+        t.$utils.showToast(res.msg);
+        if (res.flag == "yes") {
+          t.showDiscuss = false;
+        }
+        t.getDisList();
+      });
+    },
+    getDisList() {
       let t = this;
       let data = {
         course_id: t.course_id
       };
-      t.$utils.ajax(t.$api.getQuesList, "get", data, res => {
-        t.getQuesList = res;
-        console.log(res, "随机问题列表");
+      t.$utils.ajax(t.$api.getDiscussList, "get", data, res => {
+        console.log(res, "讨论区话题列表");
+        t.getDiscussList = res;
       });
     },
+
     toAnswer(id) {
       let t = this;
       if (t.userInfo.id != id) {
         t.$utils.showToast("您暂无权回答此问题");
       } else {
-        console.log('我来回答');
-        
+        console.log("我来回答");
+      }
+    },
+    toDiscuss(id, courseid, title) {
+      let t = this,
+        arr = t.JoinCourseNum;
+      let a = arr.some(v => {
+        if (v.user_id == t.userInfo.id) {
+          return true;
+        }
+      });
+      if (!a) {
+        console.log("欢迎参加讨论！");
+        uni.navigateTo({
+          url:
+            "./answerDiscuss?discuss_id=" +
+            id +
+            "&&course_id=" +
+            courseid +
+            "&&title=" +
+            title
+        });
+      } else {
+        t.$utils.showToast("您暂无权参与此话题");
       }
     },
     toDelect(user_id) {
