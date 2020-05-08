@@ -1,0 +1,50 @@
+.content {
+  width: 100%;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .navContent {
+  margin-top: 20rpx;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .navContent .box {
+  margin: 0 40rpx 40rpx 40rpx;
+  color: #fff;
+  border-radius: 10rpx;
+  background-color: var(--priceColor);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.content .navContent .box .courseTitle {
+  font-size: var(--titleSize);
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+}
+.content .navContent .box .createrMegs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding: 0 20rpx;
+  font-size: var(--normalFontSize);
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.content .confirm {
+  margin: 0 auto;
+  margin-top: 60rpx;
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 100rpx;
+  background-color: var(--themeColor);
+}
+

@@ -1,0 +1,44 @@
+.content {
+  width: 100%;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 20rpx;
+}
+.content .workDetail {
+  max-height: 300rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+  font-size: var(--titleSize);
+  font-weight: bolder;
+}
+.content .answer {
+  margin: 40rpx 0;
+  width: 100%;
+  height: 400rpx;
+  background-color: var(--contentBgc);
+}
+.content .confirm {
+  background-color: #4cd964;
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+  color: #fff;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 50rpx;
+}
+.content .myAnswer {
+  margin-top: 40rpx;
+  color: var(--themeColor);
+  text-align: center;
+  font-size: var(--navFontSize);
+  font-weight: bolder;
+}
+.content .grade {
+  font-size: var(--bigTitleSize);
+  color: royalblue;
+  text-align: center;
+}
+

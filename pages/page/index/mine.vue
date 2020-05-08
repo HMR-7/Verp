@@ -21,6 +21,7 @@
           <view class="caption">微信客服</view>
         </button>
       </view>
+     
       <view class="service_line" @tap="show=true">
         <view class="iconfont icon-credentials_icon"></view>
         <view class="caption">真实姓名</view>
@@ -81,7 +82,7 @@ export default {
   },
   onLoad() {
     let t = this;
-    let isLogin = uni.getStorageSync("UserId");
+    let isLogin = uni.getStorageSync("userInfo");
     t.isAdmin = uni.getStorageSync("isAdmin");
     if (!isLogin) {
       let login = t.$utils.checkLogin();
@@ -89,7 +90,7 @@ export default {
       t.isLogin = true;
       (t.userInfo = uni.getStorageSync("userInfo")),
         (t.sysInfo = uni.getStorageSync("sysInfo")),
-        (t.user_id = uni.getStorageSync("UserId"));
+        (t.user_id = uni.getStorageSync("userInfo").id);
     }
     console.log(t.user_id);
     t.getUserInfo();
@@ -138,7 +139,8 @@ export default {
         console.log(res, "管理员查询");
         uni.setStorageSync("rightContent", res);
       });
-    }
+    },
+   
   }
 };
 </script>

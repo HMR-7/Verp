@@ -186,6 +186,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -222,7 +223,7 @@ var _default =
   },
   onLoad: function onLoad() {
     var t = this;
-    var isLogin = uni.getStorageSync("UserId");
+    var isLogin = uni.getStorageSync("userInfo");
     t.isAdmin = uni.getStorageSync("isAdmin");
     if (!isLogin) {
       var login = t.$utils.checkLogin();
@@ -230,7 +231,7 @@ var _default =
       t.isLogin = true;
       t.userInfo = uni.getStorageSync("userInfo"),
       t.sysInfo = uni.getStorageSync("sysInfo"),
-      t.user_id = uni.getStorageSync("UserId");
+      t.user_id = uni.getStorageSync("userInfo").id;
     }
     console.log(t.user_id);
     t.getUserInfo();

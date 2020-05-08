@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -146,6 +146,7 @@ var _default =
     return {
       course_id: "",
       creater: "",
+      creater_id: "",
       workTitle: "",
       workMegs: "" };
 
@@ -156,6 +157,7 @@ var _default =
 
     t.creater = option.creater;
     t.course_id = option.course_id;
+    t.creater_id = option.creater_id;
   },
   methods: {
     toConfirmWork: function toConfirmWork() {
@@ -163,14 +165,21 @@ var _default =
       var data = {
         course_id: t.course_id,
         creater: t.creater,
+        creater_id: t.creater_id,
         workTitle: t.workTitle,
         workMegs: t.workMegs };
 
       t.$utils.ajax(t.$api.toAddWorkMegs, "post", data, function (res) {
         console.log(res);
-        t.$utils.showToast(res.msg);
+        t.$utils.showToast(res.msg + '即将跳转到课程详情');
+        setTimeout(function () {
+          uni.navigateBack({
+            delta: 1 });
+
+        }, 1000);
       });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

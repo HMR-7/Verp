@@ -14,6 +14,7 @@ export default {
     return {
       course_id: "",
       creater: "",
+      creater_id: "",
       workTitle: "",
       workMegs: ""
     };
@@ -21,9 +22,10 @@ export default {
   onLoad(option) {
     let t = this;
     console.log(option);
-    
+
     t.creater = option.creater;
     t.course_id = option.course_id;
+    t.creater_id = option.creater_id;
   },
   methods: {
     toConfirmWork() {
@@ -31,12 +33,18 @@ export default {
       let data = {
         course_id: t.course_id,
         creater: t.creater,
+        creater_id: t.creater_id,
         workTitle: t.workTitle,
         workMegs: t.workMegs
       };
       t.$utils.ajax(t.$api.toAddWorkMegs, "post", data, res => {
         console.log(res);
-        t.$utils.showToast(res.msg);
+        t.$utils.showToast(res.msg+'即将跳转到课程详情');
+        setTimeout(() => {
+          uni.navigateBack({
+            delta: 1
+          });
+        }, 1000);
       });
     }
   }

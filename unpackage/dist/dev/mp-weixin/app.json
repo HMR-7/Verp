@@ -7,7 +7,10 @@
     "pages/page/index/courseDetail",
     "pages/page/index/createWork",
     "pages/page/index/createQuesion",
-    "pages/page/index/answerDiscuss"
+    "pages/page/index/answerDiscuss",
+    "pages/page/index/answerWork",
+    "pages/page/index/answerQuestion",
+    "pages/page/index/grade"
   ],
   "subPackages": [],
   "window": {
@@ -36,6 +39,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap48.json"
+  "usingComponents": {}
 }

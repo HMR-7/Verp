@@ -98,6 +98,45 @@
 					"van-popup": "/wxcomponents/vant/dist/popup/index"
 				}
 			}
+		},
+		{
+			"path": "pages/page/index/answerWork",
+			"style": {
+				"navigationBarTitleText": "作业回答",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		},
+		{
+			"path": "pages/page/index/answerQuestion",
+			"style": {
+				"navigationBarTitleText": "随机问题回答",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		},
+		{
+			"path": "pages/page/index/grade",
+			"style": {
+				"navigationBarTitleText": "作业批改",
+				"navigationBarBackgroundColor": "#7f9ff3",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50,
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
 		}
 	],
 

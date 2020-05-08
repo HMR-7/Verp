@@ -315,6 +315,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -336,6 +346,7 @@ var _default =
       nowWorkList: "", //已发布作业列表
       workMegs: "", //显示作业信息
       getQuesList: "", //随机问题列表
+      StudentMegs: "", //随机提问人信息
       getDiscussList: "" // 获取讨论话题列表
     };
   },
@@ -346,6 +357,10 @@ var _default =
     } else {
       t.getTitle(2);
     }
+    t.getCourseDetail();
+    t.getWorkList();
+    t.getQues();
+    t.getDisList();
   },
   onLoad: function onLoad(options) {
     console.log(options);
@@ -363,10 +378,21 @@ var _default =
     t.getDisList();
   },
   methods: {
-    toCheckMegs: function toCheckMegs(workMegs) {
+    toLookMegs: function toLookMegs(workMegs) {
       var t = this;
       t.show = true;
       t.workMegs = workMegs;
+    },
+    toCheckMegs: function toCheckMegs() {
+      var t = this;for (var _len = arguments.length, obj = new Array(_len), _key = 0; _key < _len; _key++) {obj[_key] = arguments[_key];}
+      console.log(obj, "obj");
+      var a = {};
+      obj.forEach(function (v, i, arr) {
+        a = Object.assign(a, arr[i]);
+      });
+      uni.navigateTo({
+        url: "./answerWork?obj=".concat(JSON.stringify(a)) });
+
     },
     toShowWork: function toShowWork(id, isShow) {
       var t = this;
@@ -396,7 +422,6 @@ var _default =
       t.$utils.ajax(t.$api.toShowDis, "post", data, function (res) {
         t.$utils.showToast(res.msg);
         console.log(1111);
-
         t.getDisList();
       });
     },
@@ -471,7 +496,9 @@ var _default =
       var length = JoinCourseNum.length;
       var Number = Math.floor(Math.random() * length);
       var StudentMegs = JoinCourseNum[Number];
+      t.StudentMegs = StudentMegs;
       console.log(StudentMegs, "随机提问人员信息");
+
       var data = {
         course_id: t.course_id,
         user_id: StudentMegs.user_id,
@@ -510,12 +537,15 @@ var _default =
       });
     },
 
-    toAnswer: function toAnswer(id) {
+    toAnswer: function toAnswer(id, StudentMegs) {
       var t = this;
       if (t.userInfo.id != id) {
         t.$utils.showToast("您暂无权回答此问题");
       } else {
         console.log("我来回答");
+        uni.navigateTo({
+          url: "./answerQuestion?studentMegs=" + JSON.stringify(StudentMegs) });
+
       }
     },
     toDiscuss: function toDiscuss(id, courseid, title) {
@@ -552,12 +582,23 @@ var _default =
         t.getTitle(1);
       });
     },
-    toAddWork: function toAddWork(creater, course_id) {
+    toAddWork: function toAddWork(creater, course_id, creater_id) {
       var t = this;
-      console.log(creater);
-      console.log(course_id);
+      console.log(creater_id);
       uni.navigateTo({
-        url: "./createWork?creater=" + creater + "&&course_id=" + course_id });
+        url:
+        "./createWork?creater=" +
+        creater +
+        "&&course_id=" +
+        course_id +
+        "&&creater_id=" +
+        creater_id });
+
+    },
+    toGrade: function toGrade(course_id, creater_id) {
+      var t = this;
+      uni.navigateTo({
+        url: "./grade?course_id=" + course_id });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

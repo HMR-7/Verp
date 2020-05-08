@@ -16,6 +16,65 @@
   border-radius: 100rpx;
   background-color: var(--themeColor);
 }
+.content .discussDetail {
+  max-height: 90vh;
+  border-bottom: 2rpx solid #a2a2a2;
+}
+.content .discussDetail .logTitle {
+  padding: 10rpx;
+  font-size: 28rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: #fff;
+}
+.content .discussDetail .logContent {
+  border-bottom: 4rpx solid #f8f8f8;
+  background-color: #fff;
+}
+.content .discussDetail .logContent .logContentHead {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.content .discussDetail .logContent .logContentHead .userHeadImage {
+  padding-top: 10rpx;
+  padding-left: 20rpx;
+}
+.content .discussDetail .logContent .logContentHead .userHeadImage image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100%;
+}
+.content .discussDetail .logContent .logContentHead .userMegs {
+  margin: auto 0;
+  padding-left: 20rpx;
+}
+.content .discussDetail .logContent .logContentNav {
+  padding-left: 140rpx;
+  max-height: 160rpx;
+  color: #292c32;
+  font-size: 28rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .discussDetail .logContent .openTag {
+  position: absolute;
+  bottom: 0rpx;
+  right: 5rpx;
+  color: #00a2ff;
+  -webkit-box-shadow: -30rpx 0rpx 10rpx rgba(255, 255, 255, 0.8);
+          box-shadow: -30rpx 0rpx 10rpx rgba(255, 255, 255, 0.8);
+  background-color: #ffffff;
+}
+.content .discussDetail .logContent .open {
+  position: relative;
+  padding-left: 100rpx;
+  font-size: 28rpx;
+}
 .content .comfirm {
   margin: 0 auto;
   margin-top: 20rpx;

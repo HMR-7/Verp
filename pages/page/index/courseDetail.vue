@@ -1,7 +1,10 @@
 <template>
   <view class="content">
     <!-- 课程名称 -->
-    <view class="courseName">{{courseDetail.courseName}}</view>
+    <view class="courseName">
+      {{courseDetail.courseName}}
+      <view v-if="isAdmin" class="woroGrade" @tap="toGrade(course_id,creater_id)">作业批改</view>
+    </view>
     <!-- 功能模块 -->
     <view class="navModule">
       <view @tap="getTitle(1)" v-if="isAdmin==1">
@@ -86,7 +89,11 @@
         </van-popup>
       </view>
       <view v-else-if="isActive==3">
-        <view v-if="isAdmin" class="addWork" @tap="toAddWork(courseDetail.creater,course_id)">添加作业</view>
+        <view
+          v-if="isAdmin"
+          class="addWork"
+          @tap="toAddWork(courseDetail.creater,course_id,creater_id)"
+        >添加作业</view>
         <view v-if="isAdmin" class="navContentTitle">待发布作业列表</view>
         <view v-if="isAdmin">
           <scroll-view scroll-y="true" style="max-height:400rpx;padding-top: 20rpx">
@@ -102,7 +109,7 @@
                   class="showBtn"
                   @tap="toShowWork(item.id,item.isShow)"
                 ></span>
-                <span class="checkBtn" @tap="toCheckMegs(item.workMegs)">详情</span>
+                <span class="checkBtn" @tap="toLookMegs(item.workMegs)">详情</span>
               </view>
             </view>
           </scroll-view>
@@ -116,7 +123,10 @@
                 <span>{{item.workTitle}}</span>
                 <text style="color:#007aff;font-weight: bolder;">发布人:</text>
                 <span>{{item.creater}}</span>
-                <span class="checkBtn" @tap="toCheckMegs(item.workMegs)">详情</span>
+                <span
+                  class="checkBtn"
+                  @tap="toCheckMegs({work_id:item.id},{workMegs:item.workMegs},{course_id:item.course_id},{workTitle:item.workTitle})"
+                >详情</span>
               </view>
             </view>
           </scroll-view>
@@ -129,7 +139,7 @@
           class="quesBox"
           v-for="(item,index) in getQuesList"
           :key="index"
-          @tap="toAnswer(item.answer_user_id)"
+          @tap="toAnswer(item.answer_user_id,item)"
         >
           <scroll-view scroll-y="true" style="max-height:200rpx;text-align: center;">
             <text style="color:red;font-size: 40rpx;">问题：</text>
@@ -183,6 +193,7 @@ export default {
       nowWorkList: "", //已发布作业列表
       workMegs: "", //显示作业信息
       getQuesList: "", //随机问题列表
+      StudentMegs: "", //随机提问人信息
       getDiscussList: "" // 获取讨论话题列表
     };
   },
@@ -193,6 +204,10 @@ export default {
     } else {
       t.getTitle(2);
     }
+    t.getCourseDetail();
+    t.getWorkList();
+    t.getQues();
+    t.getDisList();
   },
   onLoad(options) {
     console.log(options);
@@ -210,10 +225,21 @@ export default {
     t.getDisList();
   },
   methods: {
-    toCheckMegs(workMegs) {
+    toLookMegs(workMegs) {
       let t = this;
       t.show = true;
       t.workMegs = workMegs;
+    },
+    toCheckMegs(...obj) {
+      let t = this;
+      console.log(obj, "obj");
+      let a = {};
+      obj.forEach((v, i, arr) => {
+        a = Object.assign(a, arr[i]);
+      });
+      uni.navigateTo({
+        url: `./answerWork?obj=${JSON.stringify(a)}`
+      });
     },
     toShowWork(id, isShow) {
       let t = this;
@@ -243,7 +269,6 @@ export default {
       t.$utils.ajax(t.$api.toShowDis, "post", data, res => {
         t.$utils.showToast(res.msg);
         console.log(1111);
-
         t.getDisList();
       });
     },
@@ -318,7 +343,9 @@ export default {
       let length = JoinCourseNum.length;
       let Number = Math.floor(Math.random() * length);
       let StudentMegs = JoinCourseNum[Number];
+      t.StudentMegs = StudentMegs;
       console.log(StudentMegs, "随机提问人员信息");
+
       let data = {
         course_id: t.course_id,
         user_id: StudentMegs.user_id,
@@ -357,12 +384,15 @@ export default {
       });
     },
 
-    toAnswer(id) {
+    toAnswer(id, StudentMegs) {
       let t = this;
       if (t.userInfo.id != id) {
         t.$utils.showToast("您暂无权回答此问题");
       } else {
         console.log("我来回答");
+        uni.navigateTo({
+          url: "./answerQuestion?studentMegs=" + JSON.stringify(StudentMegs)
+        });
       }
     },
     toDiscuss(id, courseid, title) {
@@ -399,12 +429,23 @@ export default {
         t.getTitle(1);
       });
     },
-    toAddWork(creater, course_id) {
+    toAddWork(creater, course_id, creater_id) {
       let t = this;
-      console.log(creater);
-      console.log(course_id);
+      console.log(creater_id);
       uni.navigateTo({
-        url: "./createWork?creater=" + creater + "&&course_id=" + course_id
+        url:
+          "./createWork?creater=" +
+          creater +
+          "&&course_id=" +
+          course_id +
+          "&&creater_id=" +
+          creater_id
+      });
+    },
+    toGrade(course_id, creater_id) {
+      let t = this;
+      uni.navigateTo({
+        url: "./grade?course_id=" + course_id
       });
     }
   }
@@ -424,6 +465,16 @@ export default {
     padding: 40rpx 0 0 40rpx;
     font-size: 48rpx;
     height: 160rpx;
+    .woroGrade {
+      position: fixed;
+      top: 40rpx;
+      right: 20rpx;
+      padding: 20rpx;
+      background-color: var(--themeColor);
+      border-radius: 20rpx;
+      font-size: 20rpx;
+      color: #fff;
+    }
   }
   .navModule {
     display: flex;

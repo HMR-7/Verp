@@ -21,7 +21,13 @@ const api = {
     getDiscussList: http + 'getDiscussList', //获取话题列表
     toShowDis: http + 'toShowDis', //发布话题
     addDiscussMegs: http + 'addDiscussMegs', //发布话题评论
-    getAllDiscussList: http + 'getDiscussList' //获取评论列表
+    getAllDiscussList: http + 'getAllDiscussList', //获取评论列表
+    addWorkAnswer: http + 'addWorkAnswer', //学生提交作业
+    getStudentAnswer: http + 'getStudentAnswer', //学生查看自己的作业内容
+    addQuesAnswer: http + 'addQuesAnswer', //学生回答随机问题答案
+    getStuQuesAnswer: http + 'getStuQuesAnswer', //学生查看是否已经回答随机问题
+    gradeWorkList: http + 'gradeWorkList', //获取分数列表
+    toUpdateGrade: http + 'toUpdateGrade' //创建者进行打分
 
 }
 export default api

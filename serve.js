@@ -307,7 +307,7 @@ app.post('/toAddWorkMegs', function (req, res) {
     req.on('end', function () {
         data = JSON.parse(data)
         console.log(data, data);
-        const sql = "insert into  work (workMegs,workTitle,creater,course_id) values ('" + data.workMegs + "','" + data.workTitle + "','" + data.creater + "','" + data.course_id + "')"
+        const sql = "insert into  work (workMegs,workTitle,creater,course_id,creater_id) values ('" + data.workMegs + "','" + data.workTitle + "','" + data.creater + "','" + data.course_id + "','" + data.creater_id + "')"
         conn.query(sql, function (err, result) {
             if (err) {
                 console.log(err);
@@ -464,8 +464,9 @@ app.post('/addDiscussMegs', function (req, res) {
     req.on('end', function () {
         data = JSON.parse(data)
         console.log(data);
-        const sql = 'insert into answerDiscuss(nickName,userImg,userMegs,course_id,discuss_id) values(?,?,?,?,?)';
-        conn.query(sql, [data.nickName, data.userImg, data.userMegs, data.course_id, data.discuss_id], function (err, result) {
+        let nowtime = new Date().getTime();
+        const sql = 'insert into answerDiscuss(nickName,userImg,userMegs,course_id,discuss_id,time) values(?,?,?,?,?,?)';
+        conn.query(sql, [data.nickName, data.userImg, data.userMegs, data.course_id, data.discuss_id, nowtime], function (err, result) {
             console.log(result, 'result');
 
             if (err) {
@@ -492,6 +493,123 @@ app.get('/getAllDiscussList', function (req, res) {
         let data = JSON.parse(_res);
         res.send(data);
     })
+})
+app.post('/addWorkAnswer', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        console.log(data);
+        let nowtime = new Date().getTime();
+        const sql = 'insert into answerWork(work_id,course_id,student_id,answer,studentName) values(?,?,?,?,?)';
+        conn.query(sql, [data.work_id, data.course_id, data.student_id, data.answer, data.studentName], function (err, result) {
+            console.log(result, 'result');
+
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "作业提交失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "作业提交成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+
+    })
+})
+app.get('/getStudentAnswer', function (req, res) {
+    let reData = req.query;
+    const sql = "select * from answerWork where student_id= " + reData.student_id + " and work_id= " + reData.work_id
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(...data);
+    })
+})
+app.post('/addQuesAnswer', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        console.log(data);
+        let nowtime = new Date().getTime();
+        const sql = 'insert into answerQuestion(student_id,question_id,answer,course_id) values(?,?,?,?)';
+        conn.query(sql, [data.student_id, data.question_id, data.answer, data.course_id], function (err, result) {
+            console.log(result, 'result');
+
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "作业提交失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "作业提交成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+
+    })
+})
+app.get('/getStuQuesAnswer', function (req, res) {
+    let reData = req.query;
+    console.log(reData, 'reDatareData');
+    const sql = "select * from answerQuestion where student_id=" + reData.student_id + " and question_id=" + reData.question_id
+    console.log(sql, 'sql');
+
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(...data);
+    })
+})
+app.get('/gradeWorkList', function (req, res) {
+    let reData = req.query;
+    console.log(reData, 'reDatareData');
+    const sql = "select * from answerWork where course_id=" + reData.course_id
+    console.log(sql, 'sql');
+
+    conn.query(sql, function (err, result) {
+        let _res = JSON.stringify(result)
+        let data = JSON.parse(_res);
+        res.send(data);
+    })
+})
+app.post('/toUpdateGrade', function (req, res) {
+    var data = "";
+    req.on('data', function (chunk) {
+        data += chunk;
+    })
+    req.on('end', function () {
+        data = JSON.parse(data)
+        const sql = "update answerWork set grade = " + data.grade + " where course_id =" + data.course_id + " and work_id =" + data.work_id
+        conn.query(sql, function (err) {
+            if (err) {
+                console.log(err);
+                res.send({
+                    msg: "评定失败!!",
+                    flag: 'no'
+                });
+            } else {
+                res.send({
+                    msg: "评定成功!!",
+                    flag: 'yes'
+                });
+            }
+        })
+        return
+    })
+
 })
 app.listen(3000, () => {
     console.log('服务已启动');

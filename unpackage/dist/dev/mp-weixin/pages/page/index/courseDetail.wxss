@@ -13,6 +13,16 @@
   font-size: 48rpx;
   height: 160rpx;
 }
+.content .courseName .woroGrade {
+  position: fixed;
+  top: 40rpx;
+  right: 20rpx;
+  padding: 20rpx;
+  background-color: var(--themeColor);
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  color: #fff;
+}
 .content .navModule {
   display: -webkit-box;
   display: -webkit-flex;

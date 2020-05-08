@@ -139,55 +139,89 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      show: false,
-      discuss_id: "",
-      userInfo: "",
-      discussMegs: "",
-      discussList: "" };
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-  },
-  onLoad: function onLoad(options) {
-    var t = this;
-    t.userInfo = uni.getStorageSync("userInfo");
-    t.course_id = options.course_id;
-    t.discuss_id = options.discuss_id;
-    t.$utils.setAppTitile(options.title);
-    console.log(options);
-    t.getDiscussList();
-  },
-  methods: {
-    getDiscussList: function getDiscussList() {
-      var t = this;
-      var data = {
-        discuss_id: t.discuss_id };
 
-      t.$utils.ajax(t.$api.getAllDiscussList, "get", data, function (res) {
-        t.discussList = res;
-        console.log(t.discussList, "评论列表");
-      });
-    },
-    comfirm: function comfirm() {
-      var t = this,
-      userInfo = t.userInfo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _moment = _interopRequireDefault(__webpack_require__(/*! moment */ 87));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+_moment.default.locale("zh-cn");var _default = { data: function data() {return { show: false, discuss_id: "", userInfo: "", discussMegs: "", discussList: "", discussLength: null //日志总条数
+    };}, onLoad: function onLoad(options) {var t = this;t.userInfo = uni.getStorageSync("userInfo");t.course_id = options.course_id;t.discuss_id = options.discuss_id;t.$utils.setAppTitile(options.title);console.log(options);t.getDiscussList();}, methods: { getDiscussList: function getDiscussList() {var t = this;var data = { discuss_id: t.discuss_id };t.$utils.ajax(t.$api.getAllDiscussList, "get", data, function (res) {res.map(function (v) {v.time = (0, _moment.default)(v.time).format("YYYY-M-DD HH:mm:ss");console.log(v.time, "相对时间");return v;});t.discussList = res;console.log(t.discussList, "评论列表");t.discussLength = res.length;});}, comfirm: function comfirm() {var t = this,userInfo = t.userInfo;
       if (t.discuss_id == "") {
         t.$utils.showToast("内容不能为空！");
         return;
@@ -203,6 +237,7 @@ var _default =
         t.$utils.showToast(res.msg);
         if (res.flag == "yes") {
           t.show = false;
+          t.getDiscussList();
         }
       });
     } } };exports.default = _default;
